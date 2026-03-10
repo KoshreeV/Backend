@@ -12,11 +12,17 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 8080;
 
-app.use(cors({ origin: process.env.FRONTEND_URL || '*', credentials: true }));
+// CORS FIX
+app.use(cors({
+  origin: [
+    "http://127.0.0.1:5500",
+    "http://localhost:5500"
+  ],
+  credentials: true
+}));
 
 app.use(express.json());
 app.use(cookieParser());
-
 
 app.get("/", (req, res) => {
   res.json({ message: "Server running on port 8080" });
